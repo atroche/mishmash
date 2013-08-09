@@ -14,6 +14,7 @@
         render-fn (push-render/renderer "content" render-config render/log-fn)
         app-model (render/consume-app-model app render-fn)]
     (app/begin app)
+    (p/put-message (:input app) {msg/type :swap msg/topic [:todos] :value 10})
     {:app app :app-model app-model}))
 
 

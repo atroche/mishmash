@@ -6,19 +6,12 @@
 
 ; transforms: handles state transitions
 
-(defn add-todo [old-value message]
-  (conj (or old-value []) (:datum message)))
-
-
-; whatever this returns will replace old-value in the data model
-(defn inc-transform [old-value _]
-  ((fnil inc 0) old-value))
-
-
+(defn swap-transform [_ message]
+  (:value message))
 
 ; an emitter function
-(defn init-main [_]
-  [[:transform-enable [:todos] :add-todo [{msg/topic [:todos] (msg/param :datum) {}}]]])
+;(defn init-main [_]
+;  [[:transform-enable [:todos] :create [{msg/topic [:todos] (msg/param :datum) {}}]]])
 
 
 
@@ -31,8 +24,5 @@
    ; the vector below specifies which function to call when a certain
    ; message is received. [type topic function]
    ; so it matches a message like: {msg/type :inc msg/topic [:my-counter]}
-   :transform [[:add-todo [:todos] add-todo]]
-
-   :emit [{:init init-main}
-          [#{[:*]} (app/default-emitter [])]]})
+   :transform [[:swap [:**] swap-transform]]})
 

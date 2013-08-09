@@ -3,5 +3,5 @@
 
 (defmacro tutorial-client-templates
   []
-  {:datum-list (dtfn (tnodes "tutorial-client.html" "datum-list" [[:ul.data]]) #{:id})
-   :datum (tfn (tnodes "tutorial-client.html" "datum"))})
+  {:datum-list (dtfn (tnodes "tutorial-client.html" "datum-list" [[:ul]]) #{:id})
+   :datum (dtfn (tnodes "tutorial-client.html" "datum") #{:id})})

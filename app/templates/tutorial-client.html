@@ -1,87 +1,10 @@
-<_within file="application.html">
+<ul class="data" field="id:id" template="datum-list">
 
-  <div id="content">
+</ul>
 
-    <div class="row-fluid" template="datum-list" field="id:id">
-
-      <div class="span6">
-
-        <div>
-          <form class="form-horizontal" id="datum-form">
-            <fieldset>
-
-            <!-- Form Name -->
-            <legend>Add a Datum</legend>
-
-            <!-- Textarea -->
-            <div class="control-group">
-              <label class="control-label" for="datum">Datum</label>
-              <div class="controls">
-                <textarea id="datum" name="datum" placeholder="place" required></textarea>
-              </div>
-            </div>
-
-            <!-- Text input-->
-            <div class="control-group">
-              <label class="control-label" for="keywords">Keywords</label>
-              <div class="controls">
-                <input id="keywords" name="keywords" type="text" placeholder="marketing, tv, sports" class="input-xlarge" required="">
-                <p class="help-block">Comma separated</p>
-              </div>
-            </div>
-
-            <!-- Text input-->
-            <div class="control-group">
-              <label class="control-label" for="source">Source</label>
-              <div class="controls">
-                <input id="source" name="source" type="text" placeholder="Australian Bureau of Statistics" class="input-xlarge">
-
-              </div>
-            </div>
-
-            <!-- Text input-->
-            <div class="control-group">
-              <label class="control-label" for="source-url">Source URL</label>
-              <div class="controls">
-                <input id="source-url" name="source-url" type="text" placeholder="http://abs.gov.au/facts" class="input-xlarge">
-
-              </div>
-            </div>
-
-            <!-- Button -->
-            <div class="control-group">
-              <label class="control-label" for="add-datum"></label>
-              <div class="controls">
-                <button id="add-datum" name="add-datum" class="btn btn-primary">Add Datum</button>
-              </div>
-            </div>
-
-            </fieldset>
-            </form>
-
-        </div>
-
-
-      </div>
-
-
-
-      <div class="span6">
-        <ul class="data">
-          <li template="datum">
-            <p field="content:datum">Something to do</p>
-            <p field="content:keywords">Something to do</p>
-            <p field="content:source">Something to do</p>
-            <p field="content:source-url">Something to do</p>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-
-
-
-
-  </div>
-
-</_within>
+<li template="datum" field="id:id">
+  <p field="content:datum">Something to do</p>
+  <p field="content:keywords">Something to do</p>
+  <p field="content:source">Something to do</p>
+  <p field="content:source-url">Something to do</p>
+</li>

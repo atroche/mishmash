@@ -31,24 +31,27 @@
     (events/send-on :click "add-datum" input-queue generate-todo-msg)))
 
 
-(defn render-template [renderer [_ path] _]
-  (let [parent (render/get-parent-id renderer path)
-        id (render/new-id! renderer path)
-        html (templates/add-template renderer path (:datum-list templates))]
-    (dom/append! (dom/by-id parent) (html {:id id}))))
+
+(defn render-template [template-name]
+  (fn [renderer [_ path] _]
+    (let [parent (render/get-parent-id renderer path)
+          id (render/new-id! renderer path)
+          html (templates/add-template renderer path (template-name templates))]
+      (dom/append! (dom/by-id parent) (html {:id id})))))
 
 
-(defn render-todos [_ [_ _ _ new-value] _]
-  (let [todo-list-element (sel "ul.data")]
-    (dom/destroy-children! todo-list-element)
-    (doseq [datum new-value]
-      (let [html ((:datum templates) datum)]
-        (dom/append! todo-list-element html)))))
+
+
+(defn update-todo [renderer [_ path old-value new-value] input-queue]
+  (templates/update-t renderer path (or new-value {:datum ""})))
 
 
 (defn render-config []
-  [[:node-create  [:todos] render-template]
-   [:node-destroy   [:todos] h/default-destroy]
+  [[:node-create [:todos] (render-template :datum-list)]
+   [:node-create [:todos :*] (render-template :datum)]
+
+   [:value [:todos :*] update-todo]
+
+   [:node-destroy   [:**] h/default-destroy]
    [:transform-enable [:todos] collect-todo-text]
-   [:transform-disable [:todos] (h/remove-send-on-click "add-datum")]
-   [:value [:todos] render-todos]])
+   [:transform-disable [:todos] (h/remove-send-on-click "add-datum")]])

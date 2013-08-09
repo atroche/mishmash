@@ -4,11 +4,12 @@
   [:node-create [] :map]
   [:node-create [:todos] :map]
   [:value [:todos] nil []]
-  [:transform-enable [:todos] :add-todo [{:io.pedestal.app.messages/topic [:todos], :io.pedestal.app.messages.param/text {}}]]
+
   :break
-  [:value [:todos] [] ["a"]]
+  [:node-create [:todos :a] :map]
+  [:value [:todos :a] nil {:datum "number 1"}]
   :break
-  [:value [:todos] ["a"] ["a" "b"]]
+  [:node-create [:todos :b] :map]
+  [:value [:todos :b] nil {:datum "number 2"}]
   :break
-  [:value [:todos] ["a" "b"] ["a" "b" "c"]]
  ]}
