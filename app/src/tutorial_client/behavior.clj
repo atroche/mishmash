@@ -9,9 +9,19 @@
 (defn swap-transform [_ message]
   (:value message))
 
+
+(defn add-todo-transform [old-value message]
+  (conj old-value {:id (:id message)
+                   :text (:text message)}))
+
+
+
+
 ; an emitter function
-;(defn init-main [_]
-;  [[:transform-enable [:todos] :create [{msg/topic [:todos] (msg/param :datum) {}}]]])
+(defn init-main [_]
+  [[:transform-enable [:todos] :add-todo [{msg/topic [:todos]
+                                           (msg/param :id) ""
+                                           (msg/param :text) ""}]]])
 
 
 
@@ -24,5 +34,8 @@
    ; the vector below specifies which function to call when a certain
    ; message is received. [type topic function]
    ; so it matches a message like: {msg/type :inc msg/topic [:my-counter]}
-   :transform [[:swap [:**] swap-transform]]})
+   :emit [{:init init-main}
+          [#{[:*]} (app/default-emitter [])]]
+   :transform [[:add-todo [:todos] add-todo-transform]
+               [:swap [:**] swap-transform]]})
 
