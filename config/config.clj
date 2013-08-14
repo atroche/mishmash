@@ -100,7 +100,7 @@
                       :order 4
                       :output-root :tools-public
                       :template "tooling.html"}
-              :production {:uri "/mishmash.html"
+              :production {:uri "/index.html"
                            :name "Production"
                            :optimizations :advanced
                            :out-file "mishmash.js"
