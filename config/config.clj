@@ -74,9 +74,11 @@
                         :out-file "mishmash-data-ui.js"
                         ;; The namespace which contains the `main`
                         ;; function to call to start the application.
-                        :main 'mishmash.simulated.start
+                        :main 'mishmash.start
                         ;; Allow render data recording. Use
                         ;; Alt-Shift-R to start and stop recording.
+                        :pretty-print true
+
                         :recording? true
                         ;; Turn on logging
                         :logging? true
@@ -89,6 +91,7 @@
               :development {:uri "/mishmash-dev.html"
                             :name "Development"
                             :out-file "mishmash-dev.js"
+                            :pretty-print true
                             :main 'mishmash.start
                             :logging? true
                             :use-api-server? false
