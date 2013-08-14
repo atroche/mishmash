@@ -1,11 +1,11 @@
-(ns tutorial-client.start
+(ns mishmash.start
   (:require [io.pedestal.app.protocols :as p]
             [io.pedestal.app :as app]
             [io.pedestal.app.render.push :as push-render]
             [io.pedestal.app.render :as render]
             [io.pedestal.app.messages :as msg]
-            [tutorial-client.behavior :as behavior]
-            [tutorial-client.rendering :as rendering]))
+            [mishmash.behavior :as behavior]
+            [mishmash.rendering :as rendering]))
 
 
 

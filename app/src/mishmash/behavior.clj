@@ -1,4 +1,4 @@
-(ns ^:shared tutorial-client.behavior
+(ns ^:shared mishmash.behavior
     (:require [clojure.string :as string]
               [io.pedestal.app.messages :as msg]
               [io.pedestal.app.util.log :as log]

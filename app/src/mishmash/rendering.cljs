@@ -1,4 +1,4 @@
-(ns tutorial-client.rendering
+(ns mishmash.rendering
   (:require [domina :as dom]
             [io.pedestal.app.render.push :as render]
             [io.pedestal.app.render.push.templates :as templates]
@@ -8,9 +8,9 @@
             [io.pedestal.app.render.push.handlers.automatic :as d])
   (:use [domina.css :only [sel]]
         [domina.events :only [listen! prevent-default]])
-  (:require-macros [tutorial-client.html-templates :as html-templates]))
+  (:require-macros [mishmash.html-templates :as html-templates]))
 
-(def templates (html-templates/tutorial-client-templates))
+(def templates (html-templates/mishmash-templates))
 
 (defn clear-form []
   (let [inputs (dom/nodes (sel "#fact-form input,textarea"))]

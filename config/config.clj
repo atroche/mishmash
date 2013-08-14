@@ -9,7 +9,7 @@
 (def configs
   ;; One project can host multiple applications. The top-level of the
   ;; config map contains one entry for each appliction.
-  {:tutorial-client
+  {:mishmash
    {;; :build contains parameters which are passed to the build
     :build {;; :watch-files contains a list of files to watch for
             ;; changes. Each file had a tag associated with it, in
@@ -19,7 +19,7 @@
             ;; any files which use macros to read in templates. This
             ;; will force recompilation of these files and update
             ;; the templates.
-            :triggers {:html [#"tutorial_client/rendering.js"]}}
+            :triggers {:html [#"mishmash/rendering.js"]}}
     ;; General application level configuration
     :application {;; The directory where all generated JavaScript for
                   ;; this application will be written.
@@ -47,12 +47,12 @@
     ;; tool. In the example below we enable the rendering view.
     :built-in {:render {;; The directory where rendering scripts
                         ;; are stored
-                        :dir "tutorial-client"
+                        :dir "mishmash"
                         ;; The namespace which contains the renderer
                         ;; to use. This namespace must have a
                         ;; `render-config` function which returns a
                         ;; render configuration.
-                        :renderer 'tutorial_client.rendering
+                        :renderer 'mishmash.rendering
                         ;; Enable logging of rendering data when in
                         ;; this view.
                         :logging? true
@@ -66,15 +66,15 @@
                         ;; be generated to host this application. This
                         ;; page will be generated from the template
                         ;; application.html
-                        :uri "/tutorial-client-data-ui.html"
+                        :uri "/mishmash-data-ui.html"
                         ;; Provide the name that will appear in the
                         ;; control panel for this aspect.
                         :name "Data UI"
                         :order 1
-                        :out-file "tutorial-client-data-ui.js"
+                        :out-file "mishmash-data-ui.js"
                         ;; The namespace which contains the `main`
                         ;; function to call to start the application.
-                        :main 'tutorial_client.simulated.start
+                        :main 'mishmash.simulated.start
                         ;; Allow render data recording. Use
                         ;; Alt-Shift-R to start and stop recording.
                         :recording? true
@@ -86,10 +86,10 @@
                         :params "renderer=auto"
                         ;; The data-ui aspect uses the tooling.html template
                         :template "tooling.html"}
-              :development {:uri "/tutorial-client-dev.html"
+              :development {:uri "/mishmash-dev.html"
                             :name "Development"
-                            :out-file "tutorial-client-dev.js"
-                            :main 'tutorial_client.start
+                            :out-file "mishmash-dev.js"
+                            :main 'mishmash.start
                             :logging? true
                             :use-api-server? false
                             :order 3}
@@ -100,18 +100,18 @@
                       :order 4
                       :output-root :tools-public
                       :template "tooling.html"}
-              :production {:uri "/tutorial-client.html"
+              :production {:uri "/mishmash.html"
                            :name "Production"
                            :optimizations :advanced
-                           :out-file "tutorial-client.js"
-                           :main 'tutorial_client.start
+                           :out-file "mishmash.js"
+                           :main 'mishmash.start
                            :use-api-server? false
                            :order 5}
-              :ui {:uri "/tutorial-client-dev-ui.html"
+              :ui {:uri "/mishmash-dev-ui.html"
                    :name "UI"
                    :order 2
-                   :out-file "tutorial-client-dev-ui.js"
-                   :main 'tutorial_client.simulated.start
+                   :out-file "mishmash-dev-ui.js"
+                   :main 'mishmash.simulated.start
                    :recording? true
                    :logging? true
                    :output-root :tools-public}}}})
