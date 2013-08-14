@@ -46,8 +46,8 @@
 
 (defmethod facts-emitter :initialise-facts [{:keys [old-model new-model] :as inputs}]
   (let [[_ new-facts _ :as diffed] (data/diff old-model new-model)]
-    (vec (for [fact (:facts new-facts)]
-      [:value [:facts (:id fact)] fact]))))
+    (for [fact (:facts new-facts)]
+      [:value [:facts (:id fact)] fact])))
 
 (defmethod facts-emitter :default [])
 
