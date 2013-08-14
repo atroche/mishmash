@@ -105,7 +105,7 @@
                            :optimizations :advanced
                            :out-file "tutorial-client.js"
                            :main 'tutorial_client.start
-                           :use-api-server? true
+                           :use-api-server? false
                            :order 5}
               :ui {:uri "/tutorial-client-dev-ui.html"
                    :name "UI"
