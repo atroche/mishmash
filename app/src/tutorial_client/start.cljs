@@ -14,11 +14,11 @@
         render-fn (push-render/renderer "content" render-config render/log-fn)
         app-model (render/consume-app-model app render-fn)]
     (app/begin app)
-    (p/put-message (:input app)
-                   {msg/type :add-todo
-                    msg/topic [:todos]
-                    :id "xyz"
-                    :text "Shave neck"})
+    ; (p/put-message (:input app)
+    ;                {msg/type :add-todo
+    ;                 msg/topic [:todos]
+    ;                 :id "xyz"
+    ;                 :text "Shave neck"})
     {:app app :app-model app-model}))
 
 

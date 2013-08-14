@@ -31,20 +31,20 @@
 
         <div class="row-fluid">
 
-          <div class="span6">
+          <div class="span5">
 
             <div>
-              <form class="form-horizontal" id="datum-form">
+              <form class="form-horizontal" id="fact-form">
                 <fieldset>
 
                 <!-- Form Name -->
-                <legend>Add a Datum</legend>
+                <legend>Add a Fact</legend>
 
                 <!-- Textarea -->
                 <div class="control-group">
-                  <label class="control-label" for="datum">Datum</label>
+                  <label class="control-label" for="fact">Fact</label>
                   <div class="controls">
-                    <textarea id="datum" name="datum" placeholder="place" required></textarea>
+                    <textarea id="fact" class="input-xlarge" name="fact" placeholder="" required></textarea>
                   </div>
                 </div>
 
@@ -75,11 +75,20 @@
                   </div>
                 </div>
 
+                <!-- Text input-->
+                <div class="control-group">
+                  <label class="control-label" for="date">Date</label>
+                  <div class="controls">
+                    <input id="date" name="date" type="date" class="input-xlarge">
+
+                  </div>
+                </div>
+
                 <!-- Button -->
                 <div class="control-group">
-                  <label class="control-label" for="add-datum"></label>
+                  <label class="control-label" for="add-fact"></label>
                   <div class="controls">
-                    <button id="add-datum" name="add-datum" class="btn btn-primary">Add Datum</button>
+                    <button id="add-fact" name="add-fact" class="btn btn-primary">Add fact</button>
                   </div>
                 </div>
 
@@ -93,7 +102,7 @@
 
 
 
-          <div class="span6" id="content">
+          <div id="content" class="span7">
           </div>
 
         </div>

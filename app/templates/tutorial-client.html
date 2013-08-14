@@ -1,10 +1,33 @@
-<ul class="data" field="id:id" template="datum-list">
+<_within file="application.html">
 
-</ul>
+<div id="content" class="span7">
 
-<li template="datum" field="id:id">
-  <p field="content:datum">Something to do</p>
-  <p field="content:keywords">Something to do</p>
-  <p field="content:source">Something to do</p>
-  <p field="content:source-url">Something to do</p>
-</li>
+  <table class="data table table-bordered" field="id:id" template="fact-list">
+
+    <thead>
+      <tr>
+        <th>Fact</th>
+        <th>Keywords</th>
+        <th>Source</th>
+        <th>Source URL</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr template="fact" field="id:id">
+        <td field="content:text">This is a cool app</td>
+        <td field="content:keywords">meta, mishmash</td>
+        <td field="content:source">Google</td>
+        <td field="content:source-url">http://google.com</td>
+        <td field="content:date">http://google.com</td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>
+
+</_within>
+
+
