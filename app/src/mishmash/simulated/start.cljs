@@ -10,17 +10,9 @@
             [io.pedestal.app-tools.tooling :as tooling]))
 
 (defn services-fn [message input-queue]
-  (let [facts (vals (:value message))
-        new? (fn [fact] (nil? (:_id fact)))
-        new-facts (filter new? facts)]
-    (doseq [fact new-facts]
-      (p/put-message input-queue {msg/type :set-fact-as-persisted
-                                  msg/topic [:facts]
-                                  :id (:id fact)}))))
-    ; for each new fact
-      ; post to server
-      ; send message to say that it's been persisted
-    ; (.log js/console (pr-str new-facts))))
+  (p/put-message input-queue {msg/type :set-fact-as-persisted
+                              msg/topic [:facts]
+                              :id (:id (:value message))}))
 
 
 

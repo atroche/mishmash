@@ -45,8 +45,10 @@
                       msg/topic [:facts]
                       :facts facts}))))
 
+
 (defn services-fn [message input-queue]
-  (.log js/console (str "ACTUALLY Sending message to server: " message)))
+  (go
+    (log/info (<! (POST "/facts" (pr-str (:value message)))))))
 
 
 (defn create-app [render-config]
@@ -59,5 +61,5 @@
 
 (defn ^:export main []
   (let [app (create-app (rendering/render-config))]
-    (fetch-facts (:input app))
+    ; (fetch-facts (:input app))
     (app/consume-effects (:app app) services-fn)))

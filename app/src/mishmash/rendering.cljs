@@ -43,7 +43,8 @@
                               (.focus fact-text-box)
                               (msg/fill transform-name
                                         messages
-                                        {:text fact-text
+                                        {:id (uuid)
+                                         :text fact-text
                                          :keywords keywords
                                          :source source
                                          :source-url source-url

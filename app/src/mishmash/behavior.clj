@@ -46,7 +46,7 @@
   [[:value
     [:facts (:id message)]
     (into {}
-      (for [property [:id :text :keywords :source :source :date]]
+      (for [property [:id :text :keywords :source :source-url :date]]
         [property (property message)]))]])
 
 (defmethod facts-emitter :initialise-facts [{:keys [message]}]
@@ -64,7 +64,10 @@
 ; effect functions
 
 (defn persist-new-facts [facts]
-  [{msg/type :facts-updated msg/topic [:facts] :value facts}])
+  (let [new-facts (filter #(nil? (:_id %)) (vals facts))]
+    (for [fact new-facts]
+      {msg/type :new-fact msg/topic [:facts] :value fact})))
+
 
 
 
