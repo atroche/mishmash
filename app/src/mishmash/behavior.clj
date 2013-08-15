@@ -9,23 +9,22 @@
 ; transforms: handles state transitions
 
 (defn add-fact-transform [old-value message]
-  (conj (or old-value []) {:id (:id message)
-                           :text (:text message)
-                           :keywords (:keywords message)
-                           :source (:source message)
-                           :source-url (:source-url message)
-                           :date (:date message)}))
+  (assoc (or old-value {})
+         (:id message)
+         {:id (:id message)
+          :text (:text message)
+          :keywords (:keywords message)
+          :source (:source message)
+          :source-url (:source-url message)
+          :date (:date message)}))
 
 
 (defn init-facts-transform [old-value message]
   (:facts message))
 
 (defn set-fact-as-persisted [old-value message]
-  (let [persisted-id (:id message)
-        ])
-  (log/info old-value)
-  (log/info message))
-  ; (assoc old-value :_id (:id old-value)))
+  (when (nil? (:_id old-value))
+    (assoc old-value :_id (:id old-value))))
 
 
 ; an emitter function
@@ -43,16 +42,21 @@
 
 (defmulti facts-emitter #(get-in % [:message msg/type]))
 
-(defmethod facts-emitter :add-fact [{:keys [new-model]}]
-  (let [fact (last (:facts new-model))]
-    [[:value [:facts (:id fact)] fact]]))
+(defmethod facts-emitter :add-fact [{:keys [message]}]
+  [[:value
+    [:facts (:id message)]
+    (into {}
+      (for [property [:id :text :keywords :source :source :date]]
+        [property (property message)]))]])
 
-(defmethod facts-emitter :initialise-facts [{:keys [old-model new-model] :as inputs}]
-  (let [[_ new-facts _ :as diffed] (data/diff old-model new-model)]
-    (for [fact (:facts new-facts)]
-      [:value [:facts (:id fact)] fact])))
+(defmethod facts-emitter :initialise-facts [{:keys [message]}]
+  (for [[id fact] (:facts message)]
+    [:value [:facts id] fact]))
 
-(defmethod facts-emitter :default [])
+(defmethod facts-emitter :set-fact-as-persisted [{:keys [message]}]
+  (log/info "adf!"))
+
+(defmethod facts-emitter :default [{:keys [new-model]}] [])
 
 
 ; effect functions
