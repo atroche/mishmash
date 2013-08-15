@@ -39,16 +39,23 @@
 
 (defn fetch-facts [input-queue]
   (go
-    (let [facts (read-string (<! (GET "/facts")))]
+    (let [fact-vec (read-string (<! (GET "/facts")))
+          fact-map (into {} (for [fact fact-vec]
+                              [(:_id fact) fact]))]
       (p/put-message input-queue
                      {msg/type :initialise-facts
                       msg/topic [:facts]
-                      :facts facts}))))
+                      :facts fact-map}))))
 
 
 (defn services-fn [message input-queue]
-  (go
-    (log/info (<! (POST "/facts" (pr-str (:value message)))))))
+  (let [fact (:value message)
+        fact (assoc fact :_id (:id fact))]
+    (go
+      (let [returned-fact (<! (POST "/facts" (pr-str fact)))]
+        (p/put-message input-queue {msg/type :set-fact-as-persisted
+                                    msg/topic [:facts]
+                                    :id (:id fact)})))))
 
 
 (defn create-app [render-config]
@@ -61,5 +68,5 @@
 
 (defn ^:export main []
   (let [app (create-app (rendering/render-config))]
-    ; (fetch-facts (:input app))
+    (fetch-facts (:input (:app app)))
     (app/consume-effects (:app app) services-fn)))
