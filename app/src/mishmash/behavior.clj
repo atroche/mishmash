@@ -8,10 +8,6 @@
 
 ; transforms: handles state transitions
 
-(defn swap-transform [_ message]
-  (:value message))
-
-
 (defn add-fact-transform [old-value message]
   (conj (or old-value []) {:id (:id message)
                            :text (:text message)
@@ -23,6 +19,13 @@
 
 (defn init-facts-transform [old-value message]
   (:facts message))
+
+(defn set-fact-as-persisted [old-value message]
+  (let [persisted-id (:id message)
+        ])
+  (log/info old-value)
+  (log/info message))
+  ; (assoc old-value :_id (:id old-value)))
 
 
 ; an emitter function
@@ -51,11 +54,13 @@
 
 (defmethod facts-emitter :default [])
 
-; So my data model will just be a vector of facts under :facts
-; But my app model will be like {:facts {:xyz {:text "asdf"} :abc {:text "a"}}}
-; So that the renderer can be have a separate template for every fact
-; And deal with their paths intelligently
-; This means we need a custom emitter. Yeah boys.
+
+; effect functions
+
+(defn persist-new-facts [facts]
+  [{msg/type :facts-updated msg/topic [:facts] :value facts}])
+
+
 
 ; dataflow description
 
@@ -70,5 +75,6 @@
           [#{[:facts]} facts-emitter]]
    :transform [[:initialise-facts [:facts] init-facts-transform]
                [:add-fact [:facts] add-fact-transform]
-               [:swap [:**] swap-transform]]})
+               [:set-fact-as-persisted [:facts] set-fact-as-persisted]]
+   :effect #{[#{[:facts]} persist-new-facts :single-val]}})
 

@@ -24,6 +24,17 @@
                       (close! ch)))))
     ch))
 
+(defn POST [url data]
+  (let [ch (chan 1)]
+    (xhr/send url
+              (fn [event]
+                (let [res (-> event .-target .getResponseText)]
+                  (go (>! ch res)
+                      (close! ch))))
+              "POST"
+              data)
+    ch))
+
 
 
 (defn fetch-facts [input-queue]
@@ -34,7 +45,8 @@
                       msg/topic [:facts]
                       :facts facts}))))
 
-
+(defn services-fn [message input-queue]
+  (.log js/console (str "ACTUALLY Sending message to server: " message)))
 
 
 (defn create-app [render-config]
@@ -42,9 +54,10 @@
         render-fn (push-render/renderer "content" render-config render/log-fn)
         app-model (render/consume-app-model app render-fn)]
     (app/begin app)
-    (fetch-facts (:input app))
     {:app app :app-model app-model}))
 
 
 (defn ^:export main []
-  (create-app (rendering/render-config)))
+  (let [app (create-app (rendering/render-config))]
+    (fetch-facts (:input app))
+    (app/consume-effects (:app app) services-fn)))
