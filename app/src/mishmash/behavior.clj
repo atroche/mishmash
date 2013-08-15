@@ -23,8 +23,9 @@
   (:facts message))
 
 (defn set-fact-as-persisted [old-value message]
-  (when (nil? (:_id old-value))
-    (assoc old-value :_id (:id old-value))))
+  (if (nil? (get-in old-value [(:id message) :_id]))
+    (assoc-in old-value [(:id message) :_id] (:id old-value))
+    old-value))
 
 
 ; an emitter function
@@ -53,8 +54,12 @@
   (for [[id fact] (:facts message)]
     [:value [:facts id] fact]))
 
-(defmethod facts-emitter :set-fact-as-persisted [{:keys [message]}]
-  (log/info "adf!"))
+(defmethod facts-emitter :set-fact-as-persisted [{:keys [old-model message] :as input}]
+  (log/info input)
+  (let [fact-id (:id message)
+        fact (get-in old-model [:facts fact-id])]
+    (log/info old-model)
+    [[:value [:facts (:id message)] (assoc fact :_id fact-id)]]))
 
 (defmethod facts-emitter :default [{:keys [new-model]}] [])
 

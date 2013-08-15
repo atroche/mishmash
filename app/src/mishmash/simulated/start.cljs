@@ -35,7 +35,11 @@
                    {msg/type :add-fact
                     msg/topic [:facts]
                     :id "200"
-                    :text "coolness"})))
+                    :text "coolness"})
+    (p/put-message (:input (:app app))
+                   {msg/type :set-fact-as-persisted
+                    msg/topic [:facts]
+                    :id "200"})))
     ; (app/consume-effects (:app app) services-fn)))
 
 
