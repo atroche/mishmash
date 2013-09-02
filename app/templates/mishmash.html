@@ -1,33 +1,23 @@
-<_within file="application.html">
+<table class="data table table-bordered" field="id:id" template="fact-list">
 
-<div id="content" class="span7">
+  <thead>
+    <tr>
+      <th>Fact</th>
+      <th>Keywords</th>
+      <th>Source</th>
+      <th>Source URL</th>
+      <th>Date</th>
+    </tr>
+  </thead>
 
-  <table class="data table table-bordered" field="id:id" template="fact-list">
+  <tbody>
+    <tr template="fact" field="id:id">
+      <td field="content:text">This is a cool app</td>
+      <td field="content:keywords">meta, mishmash</td>
+      <td field="content:source">Google</td>
+      <td field="content:source-url">http://google.com</td>
+      <td field="content:date">http://google.com</td>
+    </tr>
+  </tbody>
 
-    <thead>
-      <tr>
-        <th>Fact</th>
-        <th>Keywords</th>
-        <th>Source</th>
-        <th>Source URL</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr template="fact" field="id:id">
-        <td field="content:text">This is a cool app</td>
-        <td field="content:keywords">meta, mishmash</td>
-        <td field="content:source">Google</td>
-        <td field="content:source-url">http://google.com</td>
-        <td field="content:date">http://google.com</td>
-      </tr>
-    </tbody>
-
-  </table>
-
-</div>
-
-</_within>
-
-
+</table>

@@ -27,7 +27,6 @@
 
 (defn clear-form []
   (let [inputs (dom/nodes (sel "#fact-form input,textarea"))]
-    (.log js/console inputs)
     (doseq [input inputs]
       (dom/set-value! input ""))))
 
@@ -53,26 +52,46 @@
 
 
 
-(defn render-template [template-name]
-  (fn [renderer [_ path] _]
-    (let [parent (render/get-parent-id renderer path)
-          id (render/new-id! renderer path)
-          html (templates/add-template renderer path (template-name templates))]
-      (dom/append! (dom/by-id parent) (html {:id id})))))
+(defn render-template
+  ([template-name]
+    (render-template template-name nil))
+  ([template-name parent-id]
+    (fn [renderer [_ path] _]
+      (let [parent (render/get-parent-id renderer path)
+            parent-id (or parent-id parent)
+            id (render/new-id! renderer path)
+            template (template-name templates)
+            html (templates/add-template renderer path template)]
+        (dom/append! (dom/by-id parent-id) (html {:id id}))))))
 
 
+(defn update-screen-name [renderer [_ path old-value new-value] input-queue]
+  (let [template-data (if (get new-value :screen-name)
+                        (assoc new-value :screen-name-style "display:inline;"
+                                         :add-fact-style "display:block;"
+                                         :sign-in-button-style "display:none;")
+                        (assoc new-value :screen-name-style "display:none;"
+                                         :add-fact-style "display:none;"
+                                         :sign-in-button-style ""))]
+    (templates/update-t renderer path template-data)))
 
 
 (defn update-fact [renderer [_ path old-value new-value] input-queue]
-  (templates/update-t renderer path (or new-value {:fact ""})))
+  (templates/update-t renderer path (or new-value {:fact "fact-list"})))
+
 
 
 (defn render-config []
-  [[:node-create [:facts] (render-template :fact-list)]
-   [:node-create [:facts :*] (render-template :fact)]
+  [[:node-create [:mishmash] (render-template :app)]
 
-   [:value [:facts :*] update-fact]
+   [:value [:mishmash] update-screen-name]
+
+   [:node-create [:mishmash :facts] (render-template :fact-list "fact-list")]
+   [:node-create [:mishmash :facts :*] (render-template :fact)]
+
+   [:value [:mishmash :facts :*] update-fact]
 
    [:node-destroy   [:**] h/default-destroy]
-   [:transform-enable [:facts] collect-fact-data]
-   [:transform-disable [:facts] (h/remove-send-on-click "add-fact")]])
+   [:transform-enable [:mishmash :facts] collect-fact-data]
+   [:transform-disable [:mishmash :facts] (h/remove-send-on-click "add-fact")]])
+

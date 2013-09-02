@@ -1,0 +1,98 @@
+<div field="id:id" template="app">
+  <div class="container-fluid">
+    <div class="row-fluid">
+
+      <div class="span5" id="add-a-fact-form">
+
+        <form class="form-horizontal">
+          <fieldset>
+
+          <!-- Form Name -->
+          <legend>Add a Fact</legend>
+
+          <!-- Textarea -->
+          <div class="control-group">
+            <label class="control-label" for="fact">Fact</label>
+            <div class="controls">
+              <textarea id="fact" class="input-xlarge" name="fact" placeholder=""></textarea>
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="control-group">
+            <label class="control-label" for="keywords">Keywords</label>
+            <div class="controls">
+              <input id="keywords" name="keywords" type="text" placeholder="marketing, tv, sports" class="input-xlarge" required="">
+              <p class="help-block">Comma separated</p>
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="control-group">
+            <label class="control-label" for="source">Source</label>
+            <div class="controls">
+              <input id="source" name="source" type="text" placeholder="Australian Bureau of Statistics" class="input-xlarge">
+
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="control-group">
+            <label class="control-label" for="source-url">Source URL</label>
+            <div class="controls">
+              <input id="source-url" name="source-url" type="text" placeholder="http://abs.gov.au/facts" class="input-xlarge">
+
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="control-group">
+            <label class="control-label" for="date">Date</label>
+            <div class="controls">
+              <input id="date" name="date" type="date" class="input-xlarge">
+
+            </div>
+          </div>
+
+          <!-- Button -->
+          <div class="control-group">
+            <label class="control-label" for="add-fact"></label>
+            <div class="controls">
+              <button id="add-fact"
+                      name="add-fact"
+                      style="display:none;"
+                      class="btn btn-primary"
+                      field="style:add-fact-style">Add fact</button>
+
+              <button id="sign-in"
+                      name="sign-in"
+                      class="btn btn-primary"
+                      field="style:sign-in-button-style">
+                Sign in with Twitter
+              </button>
+
+              <div field="style:screen-name-style">
+                Logged in as:
+                <span id="screen-name" field="content:screen-name">
+                </span>
+              </div>
+            </div>
+          </div>
+
+          </fieldset>
+        </form>
+
+
+      </div>
+
+      <div class="span7" id="fact-list">
+
+      </div>
+
+    </div>
+
+
+    <footer></footer>
+
+  </div>
+</div>
