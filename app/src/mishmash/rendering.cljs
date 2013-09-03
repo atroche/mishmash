@@ -12,7 +12,7 @@
 
 (def templates (html-templates/mishmash-templates))
 
-
+; TODO: use cljs-uuid library instead
 (defn uuid
   "returns a type 4 random UUID: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
   []
@@ -66,13 +66,14 @@
 
 
 (defn update-screen-name [renderer [_ path old-value new-value] input-queue]
-  (let [template-data (if (get new-value :screen-name)
-                        (assoc new-value :screen-name-style "display:inline;"
-                                         :add-fact-style "display:block;"
-                                         :sign-in-button-style "display:none;")
-                        (assoc new-value :screen-name-style "display:none;"
-                                         :add-fact-style "display:none;"
-                                         :sign-in-button-style ""))]
+  (let [template-data {:screen-name new-value}
+        template-data (if new-value
+                        (assoc template-data :screen-name-style "display:inline;"
+                                             :add-fact-style "display:block;"
+                                             :sign-in-button-style "display:none;")
+                        (assoc template-data :screen-name-style "display:none;"
+                                             :add-fact-style "display:none;"
+                                             :sign-in-button-style ""))]
     (templates/update-t renderer path template-data)))
 
 
@@ -84,7 +85,12 @@
 (defn render-config []
   [[:node-create [:mishmash] (render-template :app)]
 
-   [:value [:mishmash] update-screen-name]
+   [:node-create
+    [:mishmash :screen-name]
+    (render-template :auth-status
+                     "auth-status-container")]
+
+   [:value [:mishmash :screen-name] update-screen-name]
 
    [:node-create [:mishmash :facts] (render-template :fact-list "fact-list")]
    [:node-create [:mishmash :facts :*] (render-template :fact)]

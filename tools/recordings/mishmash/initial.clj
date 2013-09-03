@@ -5,10 +5,9 @@
   [:node-create [] :map]
   [:node-create [:mishmash] :map]
 
-
-  [:value [:mishmash] nil {}]
+  [:node-create [:mishmash :screen-name] :map]
+  [:value [:mishmash :screen-name] nil "alistair"]
   :break
-  [:value [:mishmash] {} {:screen-name "alistair"}]
 
 
   :break
