@@ -28,6 +28,10 @@
                     msg/topic [:facts]
                     :id "200"
                     :text "coolness"})
+    (p/put-message (:input (:app app))
+                   {msg/type :set-screen-name
+                    msg/topic [:screen-name]
+                    :screen-name "atroche"})
     ; (p/put-message (:input (:app app))
     ;                {msg/type :set-fact-as-persisted
     ;                 msg/topic [:facts]

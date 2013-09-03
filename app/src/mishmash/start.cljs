@@ -59,7 +59,7 @@
 
 
 (defn create-app [render-config]
-  (let [app (app/build behavior/example-app)
+  (let [app (app/build behavior/dataflow)
         render-fn (push-render/renderer "content" render-config render/log-fn)
         app-model (render/consume-app-model app render-fn)]
     (app/begin app)
