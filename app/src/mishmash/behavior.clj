@@ -19,9 +19,11 @@
    ; message is received. [type topic function]
    ; so it matches a message like: {msg/type :inc msg/topic [:my-counter]}
    :emit [{:init emitters/init-main}
-          [#{[:facts]} emitters/facts-emitter]]
+          [#{[:facts]} emitters/facts-emitter]
+          [#{[:screen-name]} emitters/screen-name-emitter]]
    :transform [[:initialise-facts [:facts] transforms/init-facts-transform]
                [:add-fact [:facts] transforms/add-fact-transform]
-               [:set-fact-as-persisted [:facts] transforms/set-fact-as-persisted]]
+               [:set-fact-as-persisted [:facts] transforms/set-fact-as-persisted]
+               [:set-screen-name [:screen-name] transforms/set-screen-name]]
    :effect #{[#{[:facts]} effect/persist-new-facts :single-val]}})
 

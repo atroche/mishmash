@@ -39,3 +39,7 @@
 
 (defmethod facts-emitter :default [{:keys [new-model]}] [])
 
+
+
+(defn screen-name-emitter [{:keys [message]}]
+  [[:value [:mishmash :screen-name] (:screen-name message)]])

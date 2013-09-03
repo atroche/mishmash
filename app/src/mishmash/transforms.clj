@@ -25,3 +25,6 @@
   (let [fact-id (:id message)]
     (assoc-in old-value [fact-id :_id] fact-id)))
 
+
+(defn set-screen-name [old-value message]
+  (:screen-name message))

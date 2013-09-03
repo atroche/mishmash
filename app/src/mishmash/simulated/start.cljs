@@ -31,7 +31,7 @@
     (p/put-message (:input (:app app))
                    {msg/type :set-screen-name
                     msg/topic [:screen-name]
-                    :screen-name "atroche"})
+                    :screen-name "billbailey"})
     ; (p/put-message (:input (:app app))
     ;                {msg/type :set-fact-as-persisted
     ;                 msg/topic [:facts]
