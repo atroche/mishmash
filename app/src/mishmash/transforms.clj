@@ -15,11 +15,13 @@
           :keywords (:keywords message)
           :source (:source message)
           :source-url (:source-url message)
-          :date (:date message)}))
+          :date (:date message)
+          :screen-name (:screen-name message)}))
 
 
 (defn init-facts-transform [old-value message]
   (:facts message))
+
 
 (defn set-fact-as-persisted [old-value message]
   (let [fact-id (:id message)]

@@ -14,7 +14,8 @@
                                                     (msg/param :keywords) ""
                                                     (msg/param :source) ""
                                                     (msg/param :source-url) ""
-                                                    (msg/param :date) ""}]]])
+                                                    (msg/param :date) ""
+                                                    (msg/param :screen-name) ""}]]])
 
 
 
@@ -43,3 +44,4 @@
 
 (defn screen-name-emitter [{:keys [message]}]
   [[:value [:mishmash :screen-name] (:screen-name message)]])
+

@@ -19,6 +19,10 @@
 (defn ^:export main []
   (let [app (start/create-app d/data-renderer-config)]
     (p/put-message (:input (:app app))
+                   {msg/type :set-screen-name
+                    msg/topic [:screen-name]
+                    :screen-name "billbailey"})
+    (p/put-message (:input (:app app))
                    {msg/type :initialise-facts
                     msg/topic [:facts]
                     :facts {"1" {:_id "1" :id "1" :text "asdf"}
@@ -28,10 +32,6 @@
                     msg/topic [:facts]
                     :id "200"
                     :text "coolness"})
-    (p/put-message (:input (:app app))
-                   {msg/type :set-screen-name
-                    msg/topic [:screen-name]
-                    :screen-name "billbailey"})
     ; (p/put-message (:input (:app app))
     ;                {msg/type :set-fact-as-persisted
     ;                 msg/topic [:facts]

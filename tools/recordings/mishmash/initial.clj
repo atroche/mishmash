@@ -13,6 +13,7 @@
   :break
   [:node-create [:mishmash :facts] :map]
 
+  [:transform-enable [:mishmash :facts] :add-fact [{:io.pedestal.app.messages/topic [:facts], :io.pedestal.app.messages.param/id "", :io.pedestal.app.messages.param/text "", :io.pedestal.app.messages.param/keywords "", :io.pedestal.app.messages.param/source "", :io.pedestal.app.messages.param/source-url "", :io.pedestal.app.messages.param/date "", :io.pedestal.app.messages.param/screen-name ""}]]
 
   :break
   [:node-create [:mishmash :facts "a"] :map]

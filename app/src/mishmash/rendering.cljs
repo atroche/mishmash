@@ -31,13 +31,16 @@
       (dom/set-value! input ""))))
 
 (defn collect-fact-data [renderer [_ path transform-name messages] input-queue]
+  (.log js/console (dom/single-node (sel "button[name=add-fact]")))
   (let [fact-text-box (dom/by-id "fact")
         generate-fact-msg (fn [_]
                             (let [fact-text (dom/value fact-text-box)
                                   keywords (dom/value (dom/by-id "keywords"))
                                   source (dom/value (dom/by-id "source"))
                                   source-url (dom/value (dom/by-id "source-url"))
-                                  date (dom/value (dom/by-id "date"))]
+                                  date (dom/value (dom/by-id "date"))
+                                  ; TODO the following line is just fucked
+                                  screen-name (dom/text (dom/single-node (sel "span.screen-name")))]
                               (clear-form)
                               (.focus fact-text-box)
                               (msg/fill transform-name
@@ -47,8 +50,9 @@
                                          :keywords keywords
                                          :source source
                                          :source-url source-url
-                                         :date date})))]
-    (events/send-on :click "add-fact" input-queue generate-fact-msg)))
+                                         :date date
+                                         :screen-name screen-name})))]
+    (events/send-on :click (dom/single-node (sel "button[name=add-fact]")) input-queue generate-fact-msg)))
 
 
 
