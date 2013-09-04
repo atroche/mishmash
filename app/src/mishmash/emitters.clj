@@ -9,12 +9,12 @@
 
 (defn init-main [_]
   [[:transform-enable [:mishmash :facts] :add-fact [{msg/topic [:facts]
-                                           (msg/param :id) ""
-                                           (msg/param :text) ""
-                                           (msg/param :keywords) ""
-                                           (msg/param :source) ""
-                                           (msg/param :source-url) ""
-                                           (msg/param :date) ""}]]])
+                                                    (msg/param :id) ""
+                                                    (msg/param :text) ""
+                                                    (msg/param :keywords) ""
+                                                    (msg/param :source) ""
+                                                    (msg/param :source-url) ""
+                                                    (msg/param :date) ""}]]])
 
 
 
