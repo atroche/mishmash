@@ -48,6 +48,15 @@
                       :facts fact-map}))))
 
 
+(defn fetch-screen-name [input-queue]
+  (go
+    (let [screen-name (read-string (<! (GET "/screen-name")))]
+      (p/put-message input-queue
+                     {msg/type :set-screen-name
+                      msg/topic [:screen-name]
+                      :screen-name screen-name}))))
+
+
 (defn services-fn [message input-queue]
   (let [fact (:value message)
         fact (assoc fact :_id (:id fact))]
@@ -69,4 +78,5 @@
 (defn ^:export main []
   (let [app (create-app (rendering/render-config))]
     (fetch-facts (:input (:app app)))
+    (fetch-screen-name (:input (:app app)))
     (app/consume-effects (:app app) services-fn)))
