@@ -25,7 +25,9 @@
 
 (defn set-fact-as-persisted [old-value message]
   (let [fact-id (:id message)]
-    (assoc-in old-value [fact-id :_id] fact-id)))
+    (-> old-value
+      (assoc-in [fact-id :_id] fact-id)
+      (assoc-in [fact-id :timestamp] (:timestamp message)))))
 
 
 (defn set-screen-name [old-value message]

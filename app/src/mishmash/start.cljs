@@ -36,6 +36,12 @@
     ch))
 
 
+(defn timestamp-to-date [timestamp]
+  (let [date (js/Date. timestamp)]
+    (.log js/console timestamp)
+    (.log js/console date)
+    date))
+
 
 (defn fetch-facts [input-queue]
   (go
@@ -61,10 +67,11 @@
   (let [fact (:value message)
         fact (assoc fact :_id (:id fact))]
     (go
-      (let [returned-fact (<! (POST "/facts" (pr-str fact)))]
+      (let [returned-fact (read-string (<! (POST "/facts" (pr-str fact))))]
         (p/put-message input-queue {msg/type :set-fact-as-persisted
                                     msg/topic [:facts]
-                                    :id (:id fact)})))))
+                                    :id (:id fact)
+                                    :timestamp (:timestamp returned-fact)})))))
 
 
 (defn create-app [render-config]

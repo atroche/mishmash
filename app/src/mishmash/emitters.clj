@@ -36,7 +36,7 @@
 (defmethod facts-emitter :set-fact-as-persisted [{:keys [old-model message] :as input}]
   (let [fact-id (:id message)
         fact (get-in old-model [:facts fact-id])]
-    [[:value [:mishmash :facts (:id message)] (assoc fact :_id fact-id)]]))
+    [[:value [:mishmash :facts (:id message)] (assoc fact :_id fact-id :timestamp (:timestamp message))]]))
 
 (defmethod facts-emitter :default [{:keys [new-model]}] [])
 
