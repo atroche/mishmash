@@ -66,7 +66,7 @@
             id (render/new-id! renderer path)
             template (template-name templates)
             html (templates/add-template renderer path template)]
-        (dom/append! (dom/by-id parent-id) (html {:id id}))))))
+        (dom/prepend! (dom/by-id parent-id) (html {:id id}))))))
 
 
 (defn update-screen-name [renderer [_ path old-value new-value] input-queue]

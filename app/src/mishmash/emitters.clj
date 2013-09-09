@@ -29,8 +29,8 @@
       (for [property [:id :text :keywords :source :source-url :date]]
         [property (property message)]))]])
 
-(defmethod facts-emitter :initialise-facts [{:keys [message]}]
-  (for [[id fact] (:facts message)]
+(defmethod facts-emitter :initialise-facts [{:keys [new-model]}]
+  (for [[id fact] (:facts new-model)]
     [:value [:mishmash :facts id] fact]))
 
 (defmethod facts-emitter :set-fact-as-persisted [{:keys [old-model message] :as input}]

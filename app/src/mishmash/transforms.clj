@@ -19,8 +19,15 @@
           :screen-name (:screen-name message)}))
 
 
+
 (defn init-facts-transform [old-value message]
-  (:facts message))
+  (let [facts (:facts message)
+        get-time (fn [[id fact]] (:timestamp fact))
+        compare-facts (fn [key1 key2]
+                        (compare (:timestamp (key1 facts))
+                                 (:timestamp (key2 facts))))
+        sorted-facts-map (sorted-map-by compare-facts)]
+    (into sorted-facts-map facts)))
 
 
 (defn set-fact-as-persisted [old-value message]
