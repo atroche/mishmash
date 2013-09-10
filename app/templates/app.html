@@ -1,90 +1,74 @@
 <div field="id:id" template="app">
-  <div class="container-fluid">
-    <div class="row-fluid">
+  <div id="wrap">
+    <!-- Fixed navbar -->
 
-      <div class="span5" id="add-a-fact-form">
-
-        <form class="form-horizontal">
-          <fieldset>
-
-          <!-- Form Name -->
-          <legend>Add a Fact</legend>
-
-          <!-- Textarea -->
-          <div class="control-group">
-            <label class="control-label" for="fact">Fact</label>
-            <div class="controls">
-              <textarea id="fact" class="input-xlarge" name="fact" placeholder=""></textarea>
-            </div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="collapse navbar-collapse">
+          <div id="auth-status-container">
           </div>
-
-          <!-- Text input-->
-          <div class="control-group">
-            <label class="control-label" for="keywords">Keywords</label>
-            <div class="controls">
-              <input id="keywords" name="keywords" type="text" placeholder="marketing, tv, sports" class="input-xlarge" required="">
-              <p class="help-block">Comma separated</p>
-            </div>
-          </div>
-
-          <!-- Text input-->
-          <div class="control-group">
-            <label class="control-label" for="source">Source</label>
-            <div class="controls">
-              <input id="source" name="source" type="text" placeholder="Australian Bureau of Statistics" class="input-xlarge">
-
-            </div>
-          </div>
-
-          <!-- Text input-->
-          <div class="control-group">
-            <label class="control-label" for="source-url">Source URL</label>
-            <div class="controls">
-              <input id="source-url" name="source-url" type="text" placeholder="http://abs.gov.au/facts" class="input-xlarge">
-
-            </div>
-          </div>
-
-          <!-- Text input-->
-          <div class="control-group">
-            <label class="control-label" for="date">Date</label>
-            <div class="controls">
-              <input id="date" name="date" type="date" class="input-xlarge">
-
-            </div>
-          </div>
-
-          <!-- Button -->
-          <div class="control-group">
-            <label class="control-label" for="add-fact"></label>
-            <div class="controls">
-              <button
-                      name="add-fact"
-                      style="display:none;"
-                      class="btn btn-primary add-fact-button"
-                      field="style:add-fact-style">Add fact</button>
-
-
-              <div id="auth-status-container">
-              </div>
-
-            </div>
-          </div>
-
-          </fieldset>
-        </form>
-
-
+          <img src="img/mishmash-logo.png" class="brand" width="118" height="90">
+        </div><!--/.nav-collapse -->
       </div>
-
-      <div class="span7" id="fact-list">
-
-      </div>
-
     </div>
 
+    <!-- Begin page content -->
+    <div class="container">
+      <!-- header info -->
+      <div class="page-header">
+        <h1>Stick your data somewhere.</h1>
+        <p class="lead">Finally, a home for all those great stats you want to remember. MishMash allows you to store, tag, and search for datapoints of your own, and search through all of the data added by other MishMash users.
+        <br>Start by entering a stat on the left, or search through existing stats on the right.</p>
+      </div>
+      <!-- /header info-->
 
-    <footer></footer>
+      <!-- input and output -->
+      <div class="row">
+        <div class="col-md-6 left-side">
+          <h3>Input</h3>
+          <form role="form">
 
+            <div class="form-group">
+              <label for="fact">Fact</label>
+              <textarea type="text" class="form-control" rows="4" id="fact" placeholder="92% of honey badgers secretly want to be three-toed sloths."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="keywords">Keywords (comma separated)</label>
+              <input type="text" class="form-control" id="keywords" placeholder="honey badgers, sloths, animals">
+            </div>
+
+            <div class="form-group">
+              <label for="source">Source</label>
+              <input type="text" class="form-control" id="source" placeholder="Badger Quarterly">
+            </div>
+
+            <div class="form-group">
+              <label for="sourceUrl">Source URL</label>
+              <input type="url" class="form-control" id="source-url" placeholder="www.badgerqtly.com/march/report/">
+            </div>
+
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" class="form-control" id="date">
+            </div>
+
+            <div class="text-right">
+                <button name="add-fact"
+                        style="display:none;"
+                        class="btn btn-primary add-fact-button"
+                        field="style:add-fact-style">Add fact</button>
+            </div>
+          </form>
+
+        </div>
+
+        <!-- Output row -->
+      <div id="fact-list">
+        <!-- /output row -->
+      </div>
+
+      <!-- /input and output -->
+    </div>
   </div>
 </div>

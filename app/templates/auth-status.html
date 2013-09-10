@@ -1,16 +1,12 @@
-<div template="auth-status" field="id:id">
+<ul class="nav navbar-nav" template="auth-status" field="id:id">
 
-  <button id="sign-in"
-          name="sign-in"
-          class="btn btn-primary"
-          field="style:sign-in-button-style">
-    Sign in with Twitter
-  </button>
-
-  <div field="style:screen-name-style" class="hidden">
-    Logged in as:
+  <li field="class:screen-name-class" class="hidden">
+    <a>Logged in as:
     <span id="screen-name" class="screen-name" field="content:screen-name">
-    </span>
-  </div>
+    </span></a>
+  </li>
 
-</div>
+  <li field="style:sign-in-button-style"><a href="/sign-in">Log in with Twitter</a></li>
+
+</ul>
+

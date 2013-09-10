@@ -1,27 +1,43 @@
-<table class="data table table-bordered" field="id:id" template="fact-list">
+<div class="col-md-6 right-side" field="id:id" template="fact-list">
+  <h3>Output</h3>
+  <!-- Everyone / Just me buttons -->
+  <div class="text-center">
+    <div class="btn-group">
+      <button type="button"  class="btn btn-small btn-default active btn-left">Everyone</button>
+      <button type="button"  class="btn btn-small btn-default btn-right">Just you&nbsp;&nbsp;</button>
+    </div>
+  </div>
+  <!-- /buttons -->
+  <!-- Search -->
+  <div class="input-group search-bar">
+    <input type="search" class="form-control rounded" placeholder="Search">
+    <span class="input-group-btn">
+      <button class="btn btn-default rounded" type="button"> <span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+    </span>
+  </div><!-- /input-group -->
+  <!-- /search -->
 
-  <thead>
-    <tr>
-      <th>Fact</th>
-      <th>Keywords</th>
-      <th>Added at</th>
-      <th>Author</th>
-      <th>Source</th>
-      <th>Source URL</th>
-      <th>Date</th>
-    </tr>
-  </thead>
+  <div id="stream">
 
-  <tbody>
-    <tr template="fact" field="id:id">
-      <td field="content:text">This is a cool app</td>
-      <td field="content:keywords">meta, mishmash</td>
-      <td field="content:timestamp">12th August 1992</td>
-      <td field="content:screen-name">atroche</td>
-      <td field="content:source">Google</td>
-      <td field="content:source-url">http://google.com</td>
-      <td field="content:date">http://google.com</td>
-    </tr>
-  </tbody>
 
-</table>
+    <div class="drop" template="fact" field="id:id">
+
+      <p class="data-point" field="content:text">
+        51% of internet-connected devices plugged into TVs in the US are Apple TVs
+      </p>
+
+      <a class="data-source" href="#" field="content:source,href:source-url">
+        The source of this point
+      </a> <span class="source-date" field="content:date">April 23, 2013</span>
+
+      <div class="drop-keywords" field="content:keywords">
+        <span>tv</span><span>apple</span><span>connected home</span>
+      </div>
+      <div class="drop-user">
+        <span field="content:screen-name">Nic Hodges</span>
+        <img src="img/user-placeholder.png" width="50" height="50">
+      </div>
+    </div>
+
+  </div>
+</div>

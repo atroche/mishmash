@@ -31,7 +31,6 @@
       (dom/set-value! input ""))))
 
 (defn collect-fact-data [renderer [_ path transform-name messages] input-queue]
-  (.log js/console (dom/single-node (sel "button[name=add-fact]")))
   (let [fact-text-box (dom/by-id "fact")
         generate-fact-msg (fn [_]
                             (let [fact-text (dom/value fact-text-box)
@@ -72,10 +71,10 @@
 (defn update-screen-name [renderer [_ path old-value new-value] input-queue]
   (let [template-data {:screen-name new-value}
         template-data (if new-value
-                        (assoc template-data :screen-name-style "display:inline;"
+                        (assoc template-data :screen-name-class ""
                                              :add-fact-style "display:block;"
                                              :sign-in-button-style "display:none;")
-                        (assoc template-data :screen-name-style "display:none;"
+                        (assoc template-data :screen-name-class "hidden"
                                              :add-fact-style "display:none;"
                                              :sign-in-button-style ""))]
     (templates/update-t renderer path template-data)))
@@ -97,7 +96,7 @@
    [:value [:mishmash :screen-name] update-screen-name]
 
    [:node-create [:mishmash :facts] (render-template :fact-list "fact-list")]
-   [:node-create [:mishmash :facts :*] (render-template :fact)]
+   [:node-create [:mishmash :facts :*] (render-template :fact "stream")]
 
    [:value [:mishmash :facts :*] update-fact]
 
