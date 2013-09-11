@@ -1,9 +1,13 @@
 <ul class="nav navbar-nav" template="auth-status" field="id:id">
 
-  <li field="class:screen-name-class" class="hidden">
+  <li field="class:screen-name-class">
     <a>Logged in as:
     <span id="screen-name" class="screen-name" field="content:screen-name">
     </span></a>
+  </li>
+
+  <li field="class:log-out-class">
+    <a href="/sign-out">Log Out</a>
   </li>
 
   <li field="style:sign-in-button-style"><a href="/sign-in">Log in with Twitter</a></li>

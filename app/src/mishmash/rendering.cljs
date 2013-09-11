@@ -68,15 +68,17 @@
         (dom/prepend! (dom/by-id parent-id) (html {:id id}))))))
 
 
-(defn update-screen-name [renderer [_ path old-value new-value] input-queue]
-  (let [template-data {:screen-name new-value}
-        template-data (if new-value
-                        (assoc template-data :screen-name-class ""
-                                             :add-fact-style "display:block;"
-                                             :sign-in-button-style "display:none;")
-                        (assoc template-data :screen-name-class "hidden"
-                                             :add-fact-style "display:none;"
-                                             :sign-in-button-style ""))]
+(defn update-screen-name [renderer [_ path old-value new-screen-name] input-queue]
+  (let [template-data (if (not= new-screen-name "")
+                         {:screen-name-class ""
+                          :log-out-class ""
+                          :add-fact-style "display:block;"
+                          :sign-in-button-style "display:none;"}
+                         {:screen-name-class "hidden"
+                          :log-out-class "hidden"
+                          :add-fact-style "display:none;"
+                          :sign-in-button-style "display:block;"})
+        template-data (assoc template-data :screen-name new-screen-name)]
     (templates/update-t renderer path template-data)))
 
 

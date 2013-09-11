@@ -60,7 +60,7 @@
       (p/put-message input-queue
                      {msg/type :set-screen-name
                       msg/topic [:screen-name]
-                      :screen-name screen-name}))))
+                      :screen-name (or screen-name "")}))))
 
 
 (defn services-fn [message input-queue]
