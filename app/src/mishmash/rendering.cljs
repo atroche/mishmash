@@ -6,8 +6,7 @@
             [io.pedestal.app.messages :as msg]
             [io.pedestal.app.render.events :as events]
             [io.pedestal.app.render.push.handlers.automatic :as d])
-  (:use [domina.css :only [sel]]
-        [domina.events :only [listen! prevent-default]])
+  (:use [domina.css :only [sel]])
   (:require-macros [mishmash.html-templates :as html-templates]))
 
 (def templates (html-templates/mishmash-templates))
@@ -26,13 +25,14 @@
 
 
 (defn clear-form []
-  (let [inputs (dom/nodes (sel "#fact-form input,textarea"))]
+  (let [inputs (dom/nodes (sel "#fact-form input:not([type=submit]),textarea"))]
     (doseq [input inputs]
       (dom/set-value! input ""))))
 
 (defn collect-fact-data [renderer [_ path transform-name messages] input-queue]
   (let [fact-text-box (dom/by-id "fact")
-        generate-fact-msg (fn [_]
+        generate-fact-msg (fn [e]
+          ; can we use “events/collect-inputs” for below?
                             (let [fact-text (dom/value fact-text-box)
                                   keywords (dom/value (dom/by-id "keywords"))
                                   source (dom/value (dom/by-id "source"))
@@ -51,8 +51,12 @@
                                          :source-url source-url
                                          :date date
                                          :screen-name screen-name})))]
-    (events/send-on :click (dom/single-node (sel "button[name=add-fact]")) input-queue generate-fact-msg)))
-
+    (.addEventListener (dom/by-id "fact-form")
+                       "submit"
+                       (fn [e]
+                         (.preventDefault e)
+                         (events/send-transforms input-queue (generate-fact-msg e))
+                         false))))
 
 
 (defn render-template
